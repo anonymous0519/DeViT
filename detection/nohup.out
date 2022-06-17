@@ -1,0 +1,313 @@
+/home1/users/qinhaolin/.local/lib/python3.7/site-packages/apex-0.1-py3.7-linux-x86_64.egg/apex/pyprof/__init__.py:5: FutureWarning: pyprof will be removed by the end of June, 2022
+  warnings.warn("pyprof will be removed by the end of June, 2022", FutureWarning)
+/home1/users/qinhaolin/.local/lib/python3.7/site-packages/apex-0.1-py3.7-linux-x86_64.egg/apex/pyprof/__init__.py:5: FutureWarning: pyprof will be removed by the end of June, 2022
+  warnings.warn("pyprof will be removed by the end of June, 2022", FutureWarning)
+fatal: Not a git repository (or any of the parent directories): .git
+fatal: Not a git repository (or any of the parent directories): .git
+2022-06-17 03:18:03,003 - mmdet - INFO - Environment info:
+------------------------------------------------------------
+sys.platform: linux
+Python: 3.7.11 (default, Jul 27 2021, 14:32:16) [GCC 7.5.0]
+CUDA available: True
+GPU 0,1: NVIDIA GeForce RTX 3090
+CUDA_HOME: /usr/local/cuda
+NVCC: Build cuda_11.1.TC455_06.29069683_0
+GCC: gcc (Ubuntu 5.4.0-6ubuntu1~16.04.12) 5.4.0 20160609
+PyTorch: 1.8.1
+PyTorch compiling details: PyTorch built with:
+  - GCC 7.3
+  - C++ Version: 201402
+  - Intel(R) oneAPI Math Kernel Library Version 2021.4-Product Build 20210904 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v1.7.0 (Git Hash 7aed236906b1f7a05c0917e5257a1af05e9ff683)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - NNPACK is enabled
+  - CPU capability usage: AVX2
+  - CUDA Runtime 11.1
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 8.0.5
+  - Magma 2.5.2
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=11.1, CUDNN_VERSION=8.0.5, CXX_COMPILER=/opt/rh/devtoolset-7/root/usr/bin/c++, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -fopenmp -DNDEBUG -DUSE_KINETO -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -O2 -fPIC -Wno-narrowing -Wall -Wextra -Werror=return-type -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-local-typedefs -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-psabi -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, TORCH_VERSION=1.8.1, USE_CUDA=ON, USE_CUDNN=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, 
+
+TorchVision: 0.9.1
+OpenCV: 4.5.5
+MMCV: 1.3.13
+MMCV Compiler: GCC 7.3
+MMCV CUDA Compiler: 11.1
+MMDetection: 2.13.0+
+------------------------------------------------------------
+
+2022-06-17 03:18:03,712 - mmdet - INFO - Distributed training: True
+2022-06-17 03:18:04,387 - mmdet - INFO - Config:
+model = dict(
+    type='RetinaNet',
+    pretrained='torchvision://resnet50',
+    backbone=dict(
+        type='devit_b0',
+        depth=50,
+        num_stages=4,
+        out_indices=(0, 1, 2, 3),
+        frozen_stages=1,
+        norm_cfg=dict(type='BN', requires_grad=True),
+        norm_eval=True,
+        style='pytorch',
+        init_cfg=dict(
+            type='Pretrained',
+            checkpoint=
+            '/home1/users/qinhaolin/DeViT/detection/pretrained/devit_b0.pth',
+            prefix='model')),
+    neck=dict(
+        type='FPN',
+        in_channels=[32, 64, 128, 256],
+        out_channels=256,
+        start_level=1,
+        add_extra_convs='on_input',
+        num_outs=5),
+    bbox_head=dict(
+        type='RetinaHead',
+        num_classes=80,
+        in_channels=256,
+        stacked_convs=4,
+        feat_channels=256,
+        anchor_generator=dict(
+            type='AnchorGenerator',
+            octave_base_scale=4,
+            scales_per_octave=3,
+            ratios=[0.5, 1.0, 2.0],
+            strides=[8, 16, 32, 64, 128]),
+        bbox_coder=dict(
+            type='DeltaXYWHBBoxCoder',
+            target_means=[0.0, 0.0, 0.0, 0.0],
+            target_stds=[1.0, 1.0, 1.0, 1.0]),
+        loss_cls=dict(
+            type='FocalLoss',
+            use_sigmoid=True,
+            gamma=2.0,
+            alpha=0.25,
+            loss_weight=1.0),
+        loss_bbox=dict(type='L1Loss', loss_weight=1.0)),
+    train_cfg=dict(
+        assigner=dict(
+            type='MaxIoUAssigner',
+            pos_iou_thr=0.5,
+            neg_iou_thr=0.4,
+            min_pos_iou=0,
+            ignore_iof_thr=-1),
+        allowed_border=-1,
+        pos_weight=-1,
+        debug=False),
+    test_cfg=dict(
+        nms_pre=1000,
+        min_bbox_size=0,
+        score_thr=0.05,
+        nms=dict(type='nms', iou_threshold=0.5),
+        max_per_img=100))
+dataset_type = 'CocoDataset'
+data_root = '/data3/publicData/COCO/2017/'
+img_norm_cfg = dict(
+    mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
+train_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(type='LoadAnnotations', with_bbox=True),
+    dict(type='Resize', img_scale=(1333, 800), keep_ratio=True),
+    dict(type='RandomFlip', flip_ratio=0.5),
+    dict(
+        type='Normalize',
+        mean=[123.675, 116.28, 103.53],
+        std=[58.395, 57.12, 57.375],
+        to_rgb=True),
+    dict(type='Pad', size_divisor=32),
+    dict(type='DefaultFormatBundle'),
+    dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
+]
+test_pipeline = [
+    dict(type='LoadImageFromFile'),
+    dict(
+        type='MultiScaleFlipAug',
+        img_scale=(1333, 800),
+        flip=False,
+        transforms=[
+            dict(type='Resize', keep_ratio=True),
+            dict(type='RandomFlip'),
+            dict(
+                type='Normalize',
+                mean=[123.675, 116.28, 103.53],
+                std=[58.395, 57.12, 57.375],
+                to_rgb=True),
+            dict(type='Pad', size_divisor=32),
+            dict(type='ImageToTensor', keys=['img']),
+            dict(type='Collect', keys=['img'])
+        ])
+]
+data = dict(
+    samples_per_gpu=2,
+    workers_per_gpu=2,
+    train=dict(
+        type='CocoDataset',
+        ann_file=
+        '/data3/publicData/COCO/2017/annotations/instances_train2017.json',
+        img_prefix='/data3/publicData/COCO/2017/images/train2017/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(type='LoadAnnotations', with_bbox=True),
+            dict(type='Resize', img_scale=(1333, 800), keep_ratio=True),
+            dict(type='RandomFlip', flip_ratio=0.5),
+            dict(
+                type='Normalize',
+                mean=[123.675, 116.28, 103.53],
+                std=[58.395, 57.12, 57.375],
+                to_rgb=True),
+            dict(type='Pad', size_divisor=32),
+            dict(type='DefaultFormatBundle'),
+            dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
+        ]),
+    val=dict(
+        type='CocoDataset',
+        ann_file=
+        '/data3/publicData/COCO/2017/annotations/instances_val2017.json',
+        img_prefix='/data3/publicData/COCO/2017/images/val2017/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(
+                type='MultiScaleFlipAug',
+                img_scale=(1333, 800),
+                flip=False,
+                transforms=[
+                    dict(type='Resize', keep_ratio=True),
+                    dict(type='RandomFlip'),
+                    dict(
+                        type='Normalize',
+                        mean=[123.675, 116.28, 103.53],
+                        std=[58.395, 57.12, 57.375],
+                        to_rgb=True),
+                    dict(type='Pad', size_divisor=32),
+                    dict(type='ImageToTensor', keys=['img']),
+                    dict(type='Collect', keys=['img'])
+                ])
+        ]),
+    test=dict(
+        type='CocoDataset',
+        ann_file=
+        '/data3/publicData/COCO/2017/annotations/instances_val2017.json',
+        img_prefix='/data3/publicData/COCO/2017/images/val2017/',
+        pipeline=[
+            dict(type='LoadImageFromFile'),
+            dict(
+                type='MultiScaleFlipAug',
+                img_scale=(1333, 800),
+                flip=False,
+                transforms=[
+                    dict(type='Resize', keep_ratio=True),
+                    dict(type='RandomFlip'),
+                    dict(
+                        type='Normalize',
+                        mean=[123.675, 116.28, 103.53],
+                        std=[58.395, 57.12, 57.375],
+                        to_rgb=True),
+                    dict(type='Pad', size_divisor=32),
+                    dict(type='ImageToTensor', keys=['img']),
+                    dict(type='Collect', keys=['img'])
+                ])
+        ]))
+evaluation = dict(interval=1, metric='bbox')
+optimizer = dict(type='AdamW', lr=0.0001, weight_decay=0.0001)
+optimizer_config = dict(grad_clip=None)
+lr_config = dict(
+    policy='step',
+    warmup='linear',
+    warmup_iters=500,
+    warmup_ratio=0.001,
+    step=[8, 11])
+runner = dict(type='EpochBasedRunner', max_epochs=12)
+checkpoint_config = dict(interval=1)
+log_config = dict(interval=50, hooks=[dict(type='TextLoggerHook')])
+custom_hooks = [dict(type='NumClassCheckHook')]
+dist_params = dict(backend='nccl')
+log_level = 'INFO'
+load_from = None
+resume_from = None
+workflow = [('train', 1)]
+work_dir = './work_dirs/retinanet_devit_b0_fpn_1x_coco'
+gpu_ids = range(0, 2)
+
+2022-06-17 03:18:04,643 - mmdet - INFO - initialize devit_b0 with init_cfg {'type': 'Pretrained', 'checkpoint': 'torchvision://resnet50'}
+2022-06-17 03:18:04,643 - mmcv - INFO - load model from: torchvision://resnet50
+2022-06-17 03:18:04,644 - mmcv - INFO - Use load_from_torchvision loader
+Traceback (most recent call last):
+  File "./train.py", line 191, in <module>
+    main()
+  File "./train.py", line 165, in main
+    model.init_weights()
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/base_module.py", line 117, in init_weights
+    m.init_weights()
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/base_module.py", line 106, in init_weights
+    initialize(self, self.init_cfg)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/cnn/utils/weight_init.py", line 612, in initialize
+    _initialize(module, cp_cfg)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/cnn/utils/weight_init.py", line 517, in _initialize
+    func(module)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/cnn/utils/weight_init.py", line 494, in __call__
+    logger=logger)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 513, in load_checkpoint
+    checkpoint = _load_checkpoint(filename, map_location, logger)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 451, in _load_checkpoint
+    return CheckpointLoader.load_checkpoint(filename, map_location, logger)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 244, in load_checkpoint
+    return checkpoint_loader(filename, map_location)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 364, in load_from_torchvision
+    model_urls = get_torchvision_models()
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 114, in get_torchvision_models
+    _zoo = import_module(f'torchvision.models.{name}')
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 965, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'torchvision.models.detection.analyze_results'
+Traceback (most recent call last):
+  File "./train.py", line 191, in <module>
+    main()
+  File "./train.py", line 165, in main
+    model.init_weights()
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/base_module.py", line 117, in init_weights
+    m.init_weights()
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/base_module.py", line 106, in init_weights
+    initialize(self, self.init_cfg)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/cnn/utils/weight_init.py", line 612, in initialize
+    _initialize(module, cp_cfg)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/cnn/utils/weight_init.py", line 517, in _initialize
+    func(module)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/cnn/utils/weight_init.py", line 494, in __call__
+    logger=logger)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 513, in load_checkpoint
+    checkpoint = _load_checkpoint(filename, map_location, logger)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 451, in _load_checkpoint
+    return CheckpointLoader.load_checkpoint(filename, map_location, logger)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 244, in load_checkpoint
+    return checkpoint_loader(filename, map_location)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 364, in load_from_torchvision
+    model_urls = get_torchvision_models()
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/mmcv/runner/checkpoint.py", line 114, in get_torchvision_models
+    _zoo = import_module(f'torchvision.models.{name}')
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1006, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 983, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 965, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'torchvision.models.detection.analyze_results'
+Traceback (most recent call last):
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/torch/distributed/launch.py", line 340, in <module>
+    main()
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/torch/distributed/launch.py", line 326, in main
+    sigkill_handler(signal.SIGTERM, None)  # not coming back
+  File "/home1/users/qinhaolin/.conda/envs/mmseg/lib/python3.7/site-packages/torch/distributed/launch.py", line 301, in sigkill_handler
+    raise subprocess.CalledProcessError(returncode=last_return_code, cmd=cmd)
+subprocess.CalledProcessError: Command '['/home1/users/qinhaolin/.conda/envs/mmseg/bin/python', '-u', './train.py', '--local_rank=1', 'configs/retinanet_devit_b0_fpn_1x_coco.py', '--launcher', 'pytorch']' returned non-zero exit status 1.
+*****************************************
+Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+*****************************************
+Killing subprocess 65000
+Killing subprocess 65001
